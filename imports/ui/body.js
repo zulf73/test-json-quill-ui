@@ -1,10 +1,10 @@
+import { Blaze } from 'meteor/blaze';
 import { Mongo } from 'meteor/mongo';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
-import { Quill } from 'quilljs';
+import Quill from 'quilljs';
 import './body.html';
 import 'quilljs/dist/quill.snow.css'
-import './custom.css';
 
 const raw_data = require('/imports/api/jourard_self_disclosure.json');
 
@@ -53,11 +53,17 @@ Template.full_survey.events({
     }
 })
 
-Template.survey_text.onCreated(()=>{
-//    var quill = new Quill('#editor-container', {
+Template.survey_text.rendered = ()=>{
+    console.log('before quill')
+    console.log(Blaze.toHTML(Template.survey_text))
+    var container = '#editor'
+    console.log(container);
+    this.quill = new Quill(container);
+    console.log(this.quill)
+//   var quill = new Quill('#editor-container', {
 //       theme: 'snow'
 //      });
-});
+}
 
 Template.survey_answer.events({
     'click'(e,t){
