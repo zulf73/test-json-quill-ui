@@ -1,0 +1,61 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Self-Disclosure Questions</h1>
+    </header>  
+    {{> full_survey}}
+  </div>
+</body>
+
+
+
+<template name="full_survey">
+  <form>
+  <ul>
+    {{#each q in questions}}      
+    {{> survey_item index=@index obj=q}}
+    {{/each}}
+  </ul>
+  <input type="submit" name="submit" value="Submit">
+</form>
+</template>
+
+<template name="question">
+  <li>
+    <div>
+      <p><span>{{question}}</span></p>
+    </div>
+  </li>
+</template>
+
+<template name = "survey_item">
+  <div class="survey_item">
+  <li>
+    <span>{{index}}.</span>
+    <span> {{obj.question}}</span>
+    {{> survey_text qnum=index}}
+  </li>
+</div>
+</template>
+
+<template name="radioItem">
+  <div class="radioItem">
+  <input type="radio" name={{index}} value={{content}} data-src={{index}}>{{content}}
+  </div>
+</template>
+
+
+<template name="survey_text2">
+  <div class="survey_answer">
+    <div>
+      <input type="text" name={{qnum}} value="empty">
+    </div>
+  </div>
+</template>
+
+<template name="survey_text">
+  <div id="editor-container">
+    <p>This is where you answer question {{qnum}}.</p>
+    <p><strong>empty</strong></p>
+  </div>
+</template>
